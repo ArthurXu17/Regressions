@@ -152,14 +152,14 @@ public class Matrix {
 		Matrix test = new Matrix(aug);
 		double[][] inverse = new double[rows][columns];
 		
-		
+		//error options, u can't invert the matrix if it's determinent is 0 or if the matrix isn't square
 		if(rows != columns) {
 			inverse = new double[1][1];
-			inverse[0][0] = 48749323;
+			inverse[0][0] = 999999;
 		}
 		else if (this.det() == 0) {
 			inverse = new double[1][1];
-			inverse[0][0] = 696969;
+			inverse[0][0] = 999999;
 		}
 		else {
 			
@@ -186,14 +186,16 @@ public class Matrix {
 
 				//switching in case the intended pivot is 0
 				int switchcounter = i+1;
+				//only loop if the intended "pivot" is 0
 				while(aug[i][i] == 0) {
+					//creating duplicate array
 					double[][] temp = new double[aug.length][aug[0].length];
 					for(int k = 0; k < aug.length; k++) {
 						for(int l = 0; l < aug[k].length;l++) {
 							temp[k][l] = aug[k][l];
 						}
 					}
-					
+					//switch rows when a row with a non-zero counter is found
 					if(temp[switchcounter] [i]!= 0) {
 						for(int s = 0; s < 2*columns;s++) {
 							aug[i][s] = temp[switchcounter][s];
